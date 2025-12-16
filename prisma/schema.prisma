@@ -1,0 +1,80 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider     = "postgresql"
+  url          = env("DATABASE_URL")
+  relationMode = "prisma"
+}
+
+model Athlete { 
+  id          String   @id @default(cuid())
+  userId      String  
+  name        String @db.Text 
+  discipline  String @db.Text
+  asociation  String @db.Text
+  category    String @db.Text
+  elite       Boolean @default(false)
+  profileImage String @db.Text
+
+  awards      Award[]
+  supports    Support[]
+  events      Event[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Award {
+  id          String   @id @default(cuid())
+  athleteId   String? @db.Text
+  name        String @db.Text
+  description String @db.Text
+  date        DateTime
+
+  athlete     Athlete? @relation(fields: [athleteId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([athleteId])
+}
+
+model Support {
+  id          String   @id @default(cuid())
+  athleteId   String? @db.Text
+  name        String @db.Text
+  description String @db.Text
+  amount      Float 
+  date        DateTime
+
+  athlete     Athlete? @relation(fields: [athleteId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([athleteId])
+}
+
+model Event {
+  id         String   @id @default(uuid())
+  athleteId  String
+  title      String
+  start      DateTime
+  allDay     Boolean
+  timeFormat String
+
+  athlete Athlete @relation(fields: [athleteId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([athleteId])
+}
