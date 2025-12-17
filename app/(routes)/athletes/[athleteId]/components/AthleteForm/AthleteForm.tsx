@@ -96,6 +96,7 @@ export function AthleteForm(props: AthleteFormProps) {
                                             <SelectItem value="ajedrez">Ajederez</SelectItem>
                                             <SelectItem value="atletismo">Atletismo</SelectItem>
                                             <SelectItem value="batminton">Batminton</SelectItem>
+                                            <SelectItem value="billar">Billar</SelectItem>
                                             <SelectItem value="basquetbol">Basquetbol</SelectItem>
                                             <SelectItem value="boxeo">Boxeo</SelectItem>
                                             <SelectItem value="deporte_integrado">Derporte Integrado</SelectItem>

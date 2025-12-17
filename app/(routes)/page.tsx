@@ -4,22 +4,12 @@ import { LastSupports } from './components/LastSupports';
 import { AthleteAwards } from './components/AthleteAwards';
 import { TotalSuscribers } from './components/TotalSuscribers';
 import { ListIntegrations } from './components/ListItengrations';
-import { db } from '@/lib/db';
 
-export default async function Home() {
-
-  const althetes = await db.athlete.findMany({
-          // where: {
-          //     userId,
-          // },
-          orderBy: {
-              createdAt: "desc"
-          }
-      })
+export default function Home() {
   const dataCardsSummary = [
     {
       icon: UsersRound,
-      total: althetes.length.toString(),
+      total: "12.450",
       average: 15,
       title: "Atletas Inscritos",
       tooltipText: "Mira a todos los atletas"
